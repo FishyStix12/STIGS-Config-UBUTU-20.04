@@ -2,7 +2,7 @@
 ###################################################################################
 #	Author: Nicholas Fisher
 #	Date: November 11 2023
-#	Collaborators: IS 480 and Dawson Smith
+#	Collaborators: IS 480
 #	Course #: IS 480
 #	Description of Script
 #	Checks to see if Ubuntu Server meets 6 STIG Conditions for
