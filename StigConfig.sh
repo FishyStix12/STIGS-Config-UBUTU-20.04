@@ -133,7 +133,7 @@ if [[ "$checkpasswd" != "L" ]]; then
 	read -p "Would you like to prevent users from directly logging into the root user y/n: " userinput7
 	if [[ $userinput7 == [yY] || $userinput7 == [yY][eE][sS] ]]; then
 		sudo passwd -l root
-		echo "Users can no longer directly login to the root user!"
+		echo "Users can no longer directly login to the root user! STIG Checklist is complete. Have a great day!"
 	else
 		echo "STIG Checklist is complete. Have a good day!"
 	fi
