@@ -55,7 +55,7 @@ fi
 # to a minimum of 8 characters. TO ensure the system is compliant
 # run the check command and store the results to 'checklen'
 checklen=($(grep -i "difok" /etc/security/pwquality.conf | cut -d " " -f 3))
-if [[ "$checklen" != 8 ]]; then
+if [[ "$checklen" >= 8 ]]; then
 	echo "System is not compliant as users do not require a minimum passwd of 8 characters!"
 	read -p "Would you like the system to require an 8 character min for passwds y/n: " userinput3
 	if [[ $userinput3 == [yY] || $userinput3 == [yY][eE][sS] ]]; then
