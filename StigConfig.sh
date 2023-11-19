@@ -181,11 +181,21 @@ fi
 
 # STIG 6: UBTU-20-010408
 # Checks to see if the Ubunutu system doesn't allow
-# direct login into the root user
+# direct login into the root user.
 echo "STIG check 6!"
+
+# run the check command and store the results to 'checkpasswd'
 checkpasswd=($(sudo passwd -S root| cut -d " " -f 2))
 
-
+# If the command does not return an L, the script will then ask
+# the user if they would like to make it so nobody can directly
+# login to the root user. If the user responds with yes then the 
+# script will change the passwd settings for root to L (locked),
+# so nobody can directly log into the root user. If the user responds
+# with no the script congratulates the user for finishing the STIG
+# Checklist configuration script. If the command above does return
+# L as its value the script then congratulates the user for finishing
+# the STIG Checklist configuration script.
 if [[ "$checkpasswd" != "L" ]]; then
 	echo "Someone can directly login to the root user..."
 	read -p "Would you like to prevent users from directly logging into the root user y/n: " userinput7
@@ -199,4 +209,5 @@ else
 	echo "The system is compliant and nobody can log directly into the root user. Your system is now fully compliant!"
 	echo "Have a great day!"
 fi
+#reboots the system to automatically apply all the new changes on the system for all users. Thank you for using my script.
 sudo reboot
