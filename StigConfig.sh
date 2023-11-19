@@ -9,9 +9,10 @@
 #	configuration and security settings for Ubuntu 20.04.
 ###################################################################################
 # STIG 1: UBTU-20-010004
-# Check to see if GUI session lock is enabled
-# run the check command and store the results in a variable 'checklox'
+# Check to see if GUI session lock is enabled.
 echo "STIG check 1!"
+
+# run the check command and store the results in a variable 'checklox'
 checklox=$(sudo gsettings get org.gnome.desktop.screensaver lock-enabled)
 
 # if the command returns false it will ask the user if they would like
@@ -33,9 +34,12 @@ fi
 
 # STIG 2: UBTU-20-010055
 # Checks to see if Ubunutu requires a complex password with at least 1
-# special character
-# run the check command and store the results to 'checkcomp'
+# special character. Please uncomment this command
+# in the /etc/security/pwquality.conf before running this script to ensure the settings are 
+# applied to the system.
 echo "STIG check 2!"
+
+# run the check command and store the results to 'checkcomp'
 checkcomp=($(grep -i "ocredit" /etc/security/pwquality.conf| cut -d " " -f 3))
 
 # if the command returns a value of 0, then the system does not require complex passwords,
@@ -61,12 +65,15 @@ fi
 
 # STIG 3: UBTU-20-010053
 # Checks to see what the minimum password length is, and changes it
-# to a minimum of 8 characters. To ensure the system is compliant
-# run the check command and store the results to 'checklen'
+# to a minimum of 8 characters. To ensure the system is compliant. 
+# Please uncomment the difolk = 1 line in the /etc/security/pwquality.conf 
+# before running this script to ensure the settings are applied to the system.
 echo "STIG check 3!"
+
+# run the check command and store the results to 'checklen'
 checklen=($(grep -i "difok" /etc/security/pwquality.conf | cut -d " " -f 3))
 
-
+# If the command returns a value of greater than or equal to 
 if [[ "$checklen" >= 8 ]]; then
 	echo "System is not compliant as users do not require a minimum passwd of 8 characters!"
 	read -p "Would you like the system to require an 8 character min for passwds y/n: " userinput3
@@ -87,7 +94,11 @@ fi
 # Checks to see if the system application firewall is
 # enabled.
 echo "STIG check 4!"
+
+# run the check command and store the results to 'checkfire'
 checkfire=$(systemctl status ufw.service | grep -i "active:")
+
+#
 if [[ "$checkfire" == *inactive* ]]; then
         echo "The systems application firewall is disabled!"
         read -p "Would you like to enable the application firewall y/n: " userinput4
@@ -141,6 +152,7 @@ fi
 # direct login into the root user
 echo "STIG check 6!"
 checkpasswd=($(sudo passwd -S root| cut -d " " -f 2))
+
 
 if [[ "$checkpasswd" != "L" ]]; then
 	echo "Someone can directly login to the root user..."
