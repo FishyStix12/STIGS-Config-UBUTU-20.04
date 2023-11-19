@@ -16,7 +16,7 @@ checklox=$(sudo gsettings get org.gnome.desktop.screensaver lock-enabled)
 # if the command returns false it will ask the user if they would like
 # to change the settings to ensure that the Ubuntu system is compliant
 # if the command returns true the system congratulates the user
-# and moves to the next STIG
+# and moves to the next STIG.
 if [[ "$checklox" != *true* ]]; then
 	echo "system does not have screen lock enabled and is not compliant."
 	read -p "Would you like to enable screen lock? y/n: " userinput
@@ -35,6 +35,13 @@ fi
 # special character
 # run the check command and store the results to 'checkcomp'
 checkcomp=($(grep -i "ocredit" /etc/security/pwquality.conf| cut -d " " -f 3))
+
+# if the command returns a value of 0, then the system does not require complex passwords,
+# and is not compliant. It then proceeds to ask the user if they would like to change the 
+# settings to requires users to use a special character in their password. If they say yes
+# The script replaces the ocredit line in the /etc/security/pwquality.conf file to a value
+# of -1 to require users to include at least one special character in their password.
+# If the user  says no the script moves to the next STIG configuration on the checklist. 
 if [[ "$checkcomp" -eq 0 ]]; then
 	echo "System is not compliant as users do not require complex passwords!"
 	read -p "Would you like to enable the use of special chars in passwords y/n: " userinput2
@@ -55,6 +62,7 @@ fi
 # to a minimum of 8 characters. TO ensure the system is compliant
 # run the check command and store the results to 'checklen'
 checklen=($(grep -i "difok" /etc/security/pwquality.conf | cut -d " " -f 3))
+
 if [[ "$checklen" >= 8 ]]; then
 	echo "System is not compliant as users do not require a minimum passwd of 8 characters!"
 	read -p "Would you like the system to require an 8 character min for passwds y/n: " userinput3
