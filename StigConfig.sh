@@ -6,7 +6,8 @@
 #	Course #: IS 480
 #	Description of Script
 #	Checks to see if Ubuntu Server meets 6 STIG Conditions for
-#	configuration and security settings for Ubuntu 20.04.
+#	configuration and security settings for Ubuntu 20.04. Please read the 
+#	comments for STIGs 
 ###################################################################################
 # STIG 1: UBTU-20-010004
 # Check to see if GUI session lock is enabled.
@@ -34,7 +35,7 @@ fi
 
 # STIG 2: UBTU-20-010055
 # Checks to see if Ubunutu requires a complex password with at least 1
-# special character. Please uncomment this command
+# special character. Please uncomment the ocredit = 0
 # in the /etc/security/pwquality.conf before running this script to ensure the settings are 
 # applied to the system.
 echo "STIG check 2!"
