@@ -11,6 +11,7 @@
 # STIG 1: UBTU-20-010004
 # Check to see if GUI session lock is enabled
 # run the check command and store the results in a variable 'checklox'
+echo "STIG check 1!"
 checklox=$(sudo gsettings get org.gnome.desktop.screensaver lock-enabled)
 
 # if the command returns false it will ask the user if they would like
@@ -34,6 +35,7 @@ fi
 # Checks to see if Ubunutu requires a complex password with at least 1
 # special character
 # run the check command and store the results to 'checkcomp'
+echo "STIG check 2!"
 checkcomp=($(grep -i "ocredit" /etc/security/pwquality.conf| cut -d " " -f 3))
 
 # if the command returns a value of 0, then the system does not require complex passwords,
@@ -59,9 +61,11 @@ fi
 
 # STIG 3: UBTU-20-010053
 # Checks to see what the minimum password length is, and changes it
-# to a minimum of 8 characters. TO ensure the system is compliant
+# to a minimum of 8 characters. To ensure the system is compliant
 # run the check command and store the results to 'checklen'
+echo "STIG check 3!"
 checklen=($(grep -i "difok" /etc/security/pwquality.conf | cut -d " " -f 3))
+
 
 if [[ "$checklen" >= 8 ]]; then
 	echo "System is not compliant as users do not require a minimum passwd of 8 characters!"
@@ -82,6 +86,7 @@ fi
 # STIG 4: UBTU-20-010454
 # Checks to see if the system application firewall is
 # enabled.
+echo "STIG check 4!"
 checkfire=$(systemctl status ufw.service | grep -i "active:")
 if [[ "$checkfire" == *inactive* ]]; then
         echo "The systems application firewall is disabled!"
@@ -101,6 +106,7 @@ fi
 # STIG 5: UBTU-20-010439
 # Checks to see if the system is configured to use
 # Apparmor.
+echo "STIG check 5!"
 checkapp=($(sudo dpkg -l| grep apparmor| sort -u| cut -d " " -f 3| grep -w apparmor))
 
 if [[ "$checkapp" != "apparmor" ]]; then
@@ -133,7 +139,7 @@ fi
 # STIG 6: UBTU-20-010408
 # Checks to see if the Ubunutu system doesn't allow
 # direct login into the root user
-
+echo "STIG check 6!"
 checkpasswd=($(sudo passwd -S root| cut -d " " -f 2))
 
 if [[ "$checkpasswd" != "L" ]]; then
