@@ -136,8 +136,15 @@ fi
 # Checks to see if the system is configured to use
 # Apparmor.
 echo "STIG check 5!"
+
+# run the check command and store the results to 'checkapp'
 checkapp=($(sudo dpkg -l| grep apparmor| sort -u| cut -d " " -f 3| grep -w apparmor))
 
+# If the command does not return apparmor, then the package has not been
+# installed on the system. It will then ask the user if they would like
+# to download apparmor for their Ubuntu system. If the user says yes
+# the script will ask for the sudo password, and install and start 
+# the apparmor on their system.
 if [[ "$checkapp" != "apparmor" ]]; then
 	echo "Apparmor is not installed"
 	read -p "Would you like to install Apparmor y/n: " userinput5
@@ -185,3 +192,4 @@ else
 	echo "The system is compliant and nobody can log directly into the root user. Your system is now fully compliant!"
 	echo "Have a great day!"
 fi
+sudo reboot
