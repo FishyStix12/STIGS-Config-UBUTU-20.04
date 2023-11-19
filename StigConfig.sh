@@ -1,7 +1,7 @@
 #!/bin/bash
 ###################################################################################
 #	Author: Nicholas Fisher
-#	Date: November 11 2023
+#	Date: November 19 2023
 #	Collaborators: IS 480 for STIG check 1
 #	Course #: IS 480
 #	Description of Script
