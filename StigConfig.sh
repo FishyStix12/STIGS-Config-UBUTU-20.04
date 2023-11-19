@@ -20,7 +20,8 @@ checklox=$(sudo gsettings get org.gnome.desktop.screensaver lock-enabled)
 # if the command returns false it will ask the user if they would like
 # to change the settings to ensure that the Ubuntu system is compliant
 # if the command returns true the system congratulates the user
-# and moves to the next STIG.
+# and moves to the next STIG. If the command returns with true the script moves on
+# to the next STIG in the checklist.
 if [[ "$checklox" != *true* ]]; then
 	echo "system does not have screen lock enabled and is not compliant."
 	read -p "Would you like to enable screen lock? y/n: " userinput
@@ -49,7 +50,9 @@ checkcomp=($(grep -i "ocredit" /etc/security/pwquality.conf| cut -d " " -f 3))
 # settings to requires users to use a special character in their password. If they say yes
 # The script replaces the ocredit line in the /etc/security/pwquality.conf file to a value
 # of -1 to require users to include at least one special character in their password.
-# If the user  says no the script moves to the next STIG configuration on the checklist. 
+# If the user  says no the script moves to the next STIG configuration on the checklist. If the 
+# command returns with a value that does not equal 0 the script will move to the next STIG in the 
+#checklist.
 if [[ "$checkcomp" -eq 0 ]]; then
 	echo "System is not compliant as users do not require complex passwords!"
 	read -p "Would you like to enable the use of special chars in passwords y/n: " userinput2
@@ -80,7 +83,9 @@ checklen=($(grep -i "difok" /etc/security/pwquality.conf | cut -d " " -f 3))
 # length. If the user responds with yes then the script will replace the line of 
 # "difolk = 1" (base configuration for difolk setting) with "difolk = 8", making
 # it so users have to have a minimum password length of 8 characters. If the user
-#responds with no then the script moves to the next stig on the checklist.
+#responds with no then the script moves to the next stig on the checklist. If the 
+# command returns with a value is greater than or equal to 8 the script moves on
+# to the next STIG in the checklist.
 if [[ "$checklen" -lt 8 ]]; then
 	echo "System is not compliant as users do not require a minimum passwd of 8 characters!"
 	read -p "Would you like the system to require an 8 character min for passwds y/n: " userinput3
@@ -105,8 +110,14 @@ echo "STIG check 4!"
 # run the check command and store the results to 'checkfire'
 checkfire=$(systemctl status ufw.service | grep -i "active:")
 
-#
-if [[ "$checkfire" == *inactive* ]]; then
+# If the command doesn't return active, then the script will ask
+# the user if they would like to activate the application firewall.
+# If the user responds with yes, then the script will enable
+# and start the appliacation firewall on the system. If the user
+# responds with no the script will move onto the next STIG in the 
+# checklist. If the command returns with active the script moves on
+# to the next STIG in the checklist.
+if [[ "$checkfire" != *active* ]]; then
         echo "The systems application firewall is disabled!"
         read -p "Would you like to enable the application firewall y/n: " userinput4
         if [[ $userinput4 == [yY] || $userinput4 == [yY][eE][sS] ]]; then
