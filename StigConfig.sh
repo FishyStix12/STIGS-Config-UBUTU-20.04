@@ -140,11 +140,18 @@ echo "STIG check 5!"
 # run the check command and store the results to 'checkapp'
 checkapp=($(sudo dpkg -l| grep apparmor| sort -u| cut -d " " -f 3| grep -w apparmor))
 
-# If the command does not return apparmor, then the package has not been
+# If the command does not return "apparmor", then the package has not been
 # installed on the system. It will then ask the user if they would like
 # to download apparmor for their Ubuntu system. If the user says yes
 # the script will ask for the sudo password, and install and start 
-# the apparmor on their system.
+# the apparmor on their system. If the command returns "apparmor" the 
+# script will check to see if the service is enabled on the system.
+# If the command does not return enabled, it will then ask the user
+# if the would like to enable the apparmor service. If the user 
+# responds with yes then the script will enable and start the apparmor
+# service. If they respond with no the script will move onto the next STIG
+# in the checklist. If the second command does return with enabled the script
+# will move onto the next STIG in the checklist. 
 if [[ "$checkapp" != "apparmor" ]]; then
 	echo "Apparmor is not installed"
 	read -p "Would you like to install Apparmor y/n: " userinput5
