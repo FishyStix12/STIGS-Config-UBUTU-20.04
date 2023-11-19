@@ -7,7 +7,8 @@
 #	Description of Script
 #	Checks to see if Ubuntu Server meets 6 STIG Conditions for
 #	configuration and security settings for Ubuntu 20.04. Please read the 
-#	comments for STIGs 
+#	comments for STIGs 2 & 3 and make the necessary changes to ensure the
+#	script properly configures the settings on your system.
 ###################################################################################
 # STIG 1: UBTU-20-010004
 # Check to see if GUI session lock is enabled.
@@ -74,8 +75,13 @@ echo "STIG check 3!"
 # run the check command and store the results to 'checklen'
 checklen=($(grep -i "difok" /etc/security/pwquality.conf | cut -d " " -f 3))
 
-# If the command returns a value of greater than or equal to 
-if [[ "$checklen" >= 8 ]]; then
+# If the command returns a value that is less than 8 it will ask the user if they
+# Would like to require users to have a password that is at least 8 characters in
+# length. If the user responds with yes then the script will replace the line of 
+# "difolk = 1" (base configuration for difolk setting) with "difolk = 8", making
+# it so users have to have a minimum password length of 8 characters. If the user
+#responds with no then the script moves to the next stig on the checklist.
+if [[ "$checklen" -lt 8 ]]; then
 	echo "System is not compliant as users do not require a minimum passwd of 8 characters!"
 	read -p "Would you like the system to require an 8 character min for passwds y/n: " userinput3
 	if [[ $userinput3 == [yY] || $userinput3 == [yY][eE][sS] ]]; then
