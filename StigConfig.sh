@@ -12,7 +12,7 @@
 ###################################################################################
 # STIG 1: UBTU-20-010004
 # Check to see if GUI session lock is enabled.
-echo "STIG check 1!"
+echo "STIG check 1: UBTU-20-010004"
 
 # run the check command and store the results in a variable 'checklox'
 checklox=$(sudo gsettings get org.gnome.desktop.screensaver lock-enabled)
@@ -40,7 +40,7 @@ fi
 # special character. Please uncomment the ocredit = 0
 # in the /etc/security/pwquality.conf before running this script to ensure the settings are 
 # applied to the system.
-echo "STIG check 2!"
+echo "STIG check 2: UBTU-20-010055"
 
 # run the check command and store the results to 'checkcomp'
 checkcomp=($(grep -i "ocredit" /etc/security/pwquality.conf| cut -d " " -f 3))
@@ -73,7 +73,7 @@ fi
 # to a minimum of 8 characters. To ensure the system is compliant. 
 # Please uncomment the difolk = 1 line in the /etc/security/pwquality.conf 
 # before running this script to ensure the settings are applied to the system.
-echo "STIG check 3!"
+echo "STIG check 3: UBTU-20-010053"
 
 # run the check command and store the results to 'checklen'
 checklen=($(grep -i "difok" /etc/security/pwquality.conf | cut -d " " -f 3))
@@ -105,7 +105,7 @@ fi
 # STIG 4: UBTU-20-010454
 # Checks to see if the system application firewall is
 # enabled.
-echo "STIG check 4!"
+echo "STIG check 4: UBTU-20-010454"
 
 # run the check command and store the results to 'checkfire'
 checkfire=$(systemctl status ufw.service | grep -i "active:")
@@ -135,7 +135,7 @@ fi
 # STIG 5: UBTU-20-010439
 # Checks to see if the system is configured to use
 # Apparmor.
-echo "STIG check 5!"
+echo "STIG check 5: UBTU-20-010439"
 
 # run the check command and store the results to 'checkapp'
 checkapp=($(sudo dpkg -l| grep apparmor| sort -u| cut -d " " -f 3| grep -w apparmor))
@@ -182,7 +182,7 @@ fi
 # STIG 6: UBTU-20-010408
 # Checks to see if the Ubunutu system doesn't allow
 # direct login into the root user.
-echo "STIG check 6!"
+echo "STIG check 6: UBTU-20-010408"
 
 # run the check command and store the results to 'checkpasswd'
 checkpasswd=($(sudo passwd -S root| cut -d " " -f 2))
