@@ -17,7 +17,7 @@ This script will configure the following STIGs for Ubuntu 20.04 with the main co
     " sudo passwd -S root| cut -d " " -f 2 " <br />
 <br />
 Please follow the following guidlines for the script to ensure it runs properly: <br />
-
-
+<br />
+<br />
 1. To ensure that this script properly works please go to the /etc/security/pwquality file in your Ubuntu system, and delete the number signs on the lines with the variables "ocredit" and "difolk".  <br />
 2. Also ensure that whoever runs this script is a user with root privileges, as most of these configuartions require the use of Linux's sudo command (which is a command that allows us to execute system commands with root privileges). <br />
