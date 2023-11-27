@@ -3,6 +3,7 @@ This script checks to see if an Ubuntu 20.04 (Focal Fossa) 20.04 machine meets 6
 
 
 This script will configure the following STIGs for Ubuntu 20.04 with the main commands to check to see whether your system is complaint to DoD standards: <br />
+<br />
 1. UBTU-20-010004 - Checks to see if GUI session lock is enabled. <br />
    " sudo gsettings get org.gnome.desktop.screensaver lock-enabled " <br />
 2. UBTU-20-010055 - Checks to see if Ubuntu requires a complex password with at least 1 special character. <br />
@@ -17,7 +18,6 @@ This script will configure the following STIGs for Ubuntu 20.04 with the main co
     " sudo passwd -S root| cut -d " " -f 2 " <br />
 <br />
 Please follow the following guidlines for the script to ensure it runs properly: <br />
-<br />
 <br />
 1. To ensure that this script properly works please go to the /etc/security/pwquality.conf file in your Ubuntu system, and delete the number signs on the lines in the file with the variables "ocredit" and "difolk".  <br />
 2. Also ensure that whoever runs this script is a user with root privileges, as most of these configuartions require the use of Linux's sudo command (which is a command that allows us to execute system commands with root privileges). <br />
