@@ -8,7 +8,9 @@
 #	Checks to see if Ubuntu Server meets 6 STIG Conditions for
 #	configuration and security settings for Ubuntu 20.04. Please read the 
 #	comments for STIGs 2 & 3 and make the necessary changes to ensure the
-#	script properly configures the settings on your system.
+#	script properly configures the settings on your system. For this script to
+#	properly work the user running the script must have access to root
+#	privileges on their Ubuntu 20.04 Machine.
 ###################################################################################
 # STIG 1: UBTU-20-010004
 # Check to see if GUI session lock is enabled.
