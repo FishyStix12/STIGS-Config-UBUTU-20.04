@@ -8,7 +8,7 @@ This script will configure the following STIGs for Ubuntu 20.04 with the main co
 3. UBTU-20-010053 - Checks to see if the minimum password length for users is 8 characters or longer.
    "checklen=($(grep -i "difok" /etc/security/pwquality.conf | cut -d " " -f 3))"
 4. UBTU-20-010454 - Checks to see if the application firewall is enabled.
-   "checkfire=$(systemctl status ufw.service | grep -i "active:")"
+   checkfire=$(systemctl status ufw.service | grep -i "active:")
 5. UBTU-20-010439 - Checks to see if the Ubuntu system is configured to use the AppArmor tool.
    "checkapp=($(sudo dpkg -l| grep apparmor| sort -u| cut -d " " -f 3| grep -w apparmor))"
 9. UBTU-20-010439 - Checks to see if the system does not allow someone to directly login to the root user.
