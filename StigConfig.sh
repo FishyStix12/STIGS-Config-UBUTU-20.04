@@ -180,7 +180,6 @@ else
 	fi
 fi
 
-
 # STIG 6: UBTU-20-010408
 # Checks to see if the Ubunutu system doesn't allow
 # direct login into the root user.
