@@ -135,8 +135,8 @@ else
 fi
 
 # STIG 5: UBTU-20-010439
-# Checks to see if the system is configured to use
-# Apparmor tool.
+# Checks to see if the Ubuntu 20.04 system is configured to use
+# the Apparmor tool.
 echo "STIG check 5: UBTU-20-010439"
 
 # run the check command and store the results to 'checkapp'
