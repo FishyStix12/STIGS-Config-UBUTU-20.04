@@ -134,7 +134,7 @@ fi
 
 # STIG 5: UBTU-20-010439
 # Checks to see if the system is configured to use
-# Apparmor.
+# Apparmor tool.
 echo "STIG check 5: UBTU-20-010439"
 
 # run the check command and store the results to 'checkapp'
