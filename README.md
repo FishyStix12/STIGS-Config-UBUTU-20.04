@@ -1,5 +1,7 @@
 # STIGS-Config-UBUTU-20.04 Final Project
 This script checks to see if an Ubuntu 20.04 (Focal Fossa) 20.04 machine meets 6 Department of Defense's STIG configruations to ensure our machines meet the Department of Defense's standards. <br />
+
+
 This script will configure the following STIGs for Ubuntu 20.04 with the main commands to check to see whether your system is complaint to DoD standards: <br />
 1. UBTU-20-010004 - Checks to see if GUI session lock is enabled. <br />
    " sudo gsettings get org.gnome.desktop.screensaver lock-enabled " <br />
