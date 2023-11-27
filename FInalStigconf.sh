@@ -212,4 +212,4 @@ else
 	echo "Have a great day!"
 fi
 #reboots the system to automatically apply all the new changes on the system for all users. Thank you for using my script.
-#sudo reboot
+sudo reboot
