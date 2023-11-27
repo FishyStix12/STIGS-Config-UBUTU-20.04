@@ -4,17 +4,17 @@ This script checks to see if an Ubuntu 20.04 (Focal Fossa) 20.04 machine meets 6
 
 This script will configure the following STIGs for Ubuntu 20.04 with the main commands to check to see whether your system is complaint to DoD standards: <br />
 1. UBTU-20-010004 - Checks to see if GUI session lock is enabled. <br />
-   " sudo gsettings get org.gnome.desktop.screensaver lock-enabled " <br />
+   code to check configuration : " sudo gsettings get org.gnome.desktop.screensaver lock-enabled " <br />
 2. UBTU-20-010055 - Checks to see if Ubuntu requires a complex password with at least 1 special character. <br />
-   " grep -i "ocredit" /etc/security/pwquality.conf| cut -d " " -f 3 " <br />
+   code to check configuration : " grep -i "ocredit" /etc/security/pwquality.conf| cut -d " " -f 3 " <br />
 3. UBTU-20-010053 - Checks to see if the minimum password length for users is 8 characters or longer. <br />
-   " grep -i "difok" /etc/security/pwquality.conf | cut -d " " -f 3 " <br />
+   code to check configuration : " grep -i "difok" /etc/security/pwquality.conf | cut -d " " -f 3 " <br />
 4. UBTU-20-010454 - Checks to see if the application firewall is enabled. <br />
-   " checkfire=$(systemctl status ufw.service | grep -i "active:" " <br />
+   code to check configuration :  " checkfire=$(systemctl status ufw.service | grep -i "active:" " <br />
 5. UBTU-20-010439 - Checks to see if the Ubuntu system is configured to use the AppArmor tool. <br />
-   " sudo dpkg -l| grep apparmor| sort -u| cut -d " " -f 3| grep -w apparmor " <br />
+   code to check configuration : " sudo dpkg -l| grep apparmor| sort -u| cut -d " " -f 3| grep -w apparmor " <br />
 9. UBTU-20-010439 - Checks to see if the system does not allow someone to directly login to the root user. <br />
-    " sudo passwd -S root| cut -d " " -f 2 " <br />
+    code to check configuration : " sudo passwd -S root| cut -d " " -f 2 " <br />
 <br />
 Please follow the following guidlines for the script to ensure it runs properly:  <br />
 1. o ensure that this script properly works please go to the /etc/security/pwquality.conf file in your Ubuntu system, and delete the number signs on the lines in the file with the variables "ocredit" and "difolk".  <br />
